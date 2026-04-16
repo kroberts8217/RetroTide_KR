@@ -1378,15 +1378,23 @@ def visualize_stereo_correspondence(mol1: Chem.Mol, mol2: Chem.Mol, chiral_resul
                       and bond.GetEndAtomIdx() in all_bonds_2]
     
     AllChem.Compute2DCoords(mol1)
+    AllChem.Compute2DCoords(mol2)
     AllChem.GenerateDepictionMatching2DStructure(mol2, mol1, acceptFailure=True)
 
-    svg = Draw.MolsToGridImage([mol1, mol2], legends=['PKS Product', 'Target'],
-                                molsPerRow=2, highlightAtomLists=[all_1, all_2],
-                                highlightAtomColors=[highlight_1, highlight_2],
-                                highlightBondLists=[bond_indices_1, bond_indices_2],
-                                useSVG=True,
-                                subImgSize=(500, 400))
-    
+    img = Draw.rdMolDraw2D.MolDraw2DSVG(1000, 400, 500, 400)
+
+    opts = img.drawOptions()
+    opts.useBWAtomPalette()
+    opts.drawMolsSameScale = True
+    opts.padding = 0.1
+
+    img.DrawMolecules([mol1, mol2], legends=['PKS Product', 'Target'],
+                      highlightAtoms=[all_1, all_2],
+                      highlightAtomColors=[highlight_1, highlight_2],
+                      highlightBonds=[bond_indices_1, bond_indices_2],
+                      )
+    img.FinishDrawing()
+    svg = img.GetDrawingText()
     svg = svg.replace(
         "width='500.0' height='400.0' x='0.0' y='0.0'",
         "width='1000.0' height='400.0' x='0.0' y='0.0'"
