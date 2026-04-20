@@ -1300,13 +1300,18 @@ def kr_swaps_algorithm(unbound_mol: Chem.Mol, target_mol: Chem.Mol, full_map_df:
     pks_features_updated = dh_swaps(pks_features_updated, alkene_mismatch_results)
 
     krs_result = postprocessing(pks_features_updated, target_mol, offload_mech, type_u_mods)
+    problem_mods = []
     if krs_result.chiral_result.mmatch1:
         print('Correcting remianing R/S mismatches')
         cc_mismatch_results_f, type_u_mods = get_cc_mismatch_results(
             krs_result.pks_product, krs_result.mapping, krs_result.chiral_result)
         pks_features_updated = er_swaps(pks_features_updated, cc_mismatch_results_f)
-        return postprocessing(pks_features_updated, target_mol, offload_mech, type_u_mods)
-    return krs_result
+        for result in cc_mismatch_results_f:
+            target_mod = get_mod_number(result['module_i+1'])
+            problem_mods.append(target_mod)
+        krs_result = postprocessing(pks_features_updated, target_mol, offload_mech, type_u_mods)
+        return krs_result, problem_mods
+    return krs_result, problem_mods
 
 # Post processing functions
 def add_atom_labels(mol: Chem.Mol, chiral_centers: dict) -> Chem.Mol:
@@ -1443,7 +1448,7 @@ def krswaps_stereo_correction(target_smi: str, stereo: str, offload_mech: str):
                                                                       offload_mech)
     pks_target_mol, mcs_score = get_pks_target(unbound_pks_product, target_mol)
     pp_result = preprocessing(pks_design_features, unbound_pks_product, pks_target_mol)
-    krs_result = kr_swaps_algorithm(
+    krs_result, problem_mods = kr_swaps_algorithm(
         pp_result.unbound_mol,
         pp_result.target_mol,
         pp_result.mapping,
@@ -1467,7 +1472,7 @@ def krswaps_stereo_correction(target_smi: str, stereo: str, offload_mech: str):
         'mcs_similarity': mcs_score,
         'jaccard_i': compute_jaccard_sim(pp_result.unbound_mol, target_mol),
         'jaccard_f': compute_jaccard_sim(krs_result.pks_product, target_mol)
-    }
+    }, problem_mods
 
 def output_results(results, job_name, output_path):
     """
