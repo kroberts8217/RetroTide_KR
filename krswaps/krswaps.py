@@ -1314,11 +1314,13 @@ def kr_swaps_algorithm(unbound_mol: Chem.Mol, target_mol: Chem.Mol, full_map_df:
         cc_mismatch_results_f, type_u_mods = get_cc_mismatch_results(
             krs_result.pks_product, krs_result.mapping, krs_result.chiral_result)
         pks_features_updated = er_swaps(pks_features_updated, cc_mismatch_results_f)
-        for result in cc_mismatch_results_f:
+        krs_result_2 = postprocessing(pks_features_updated, target_mol, offload_mech, type_u_mods)
+        cc_mismatch_results_f2 = get_cc_mismatch_results(
+            krs_result_2.pks_product, krs_result_2.mapping, krs_result_2.chiral_result)[0]
+        for result in cc_mismatch_results_f2:
             target_mod = get_mod_number(result['module_i+1'])
             problem_mods.add(target_mod)
-        krs_result = postprocessing(pks_features_updated, target_mol, offload_mech, type_u_mods)
-        return krs_result, problem_mods
+        return krs_result_2, problem_mods
     return krs_result, problem_mods
 
 # Post processing functions
