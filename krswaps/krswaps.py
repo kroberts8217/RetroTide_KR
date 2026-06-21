@@ -2,6 +2,7 @@
 Modules for running RetroTide with the KR Swaps stereochemistry correction algorithm
 """
 import json
+import time
 from collections import namedtuple, OrderedDict
 from typing import Tuple
 from rdkit import Chem
@@ -1452,10 +1453,14 @@ def krswaps_stereo_correction(target_smi: str, stereo: str, offload_mech: str):
         MCS and Jaccard similarity metrics comparing the predicted PKS product to the entire
         target molecule.
     """
+    alg_tic = time.perf_counter()
     target_mol = Chem.MolFromSmiles(canonicalize_smiles(target_smi, stereo))
+    retrotide_tic = time.perf_counter()
     unbound_pks_product, pks_design_features = get_retro_tide_results(target_smi,
                                                                       stereo,
                                                                       offload_mech)
+    retrotide_toc = time.perf_counter()
+    
     pks_target_mol, mcs_score = get_pks_target(unbound_pks_product, target_mol)
     pp_result = preprocessing(pks_design_features, unbound_pks_product, pks_target_mol)
     krs_result, problem_mods = kr_swaps_algorithm(
@@ -1466,6 +1471,10 @@ def krswaps_stereo_correction(target_smi: str, stereo: str, offload_mech: str):
         offload_mech,
         pp_result.chiral_result,
         pp_result.alkene_result)
+    alg_toc = time.perf_counter()
+    retrotide_time = retrotide_toc - retrotide_tic
+    alg_time = alg_toc - alg_tic
+    krswaps_time = alg_time - retrotide_time
     return {
         'stereo_before': visualize_stereo_correspondence(pp_result.unbound_mol,
                                                          pp_result.target_mol,
@@ -1481,7 +1490,10 @@ def krswaps_stereo_correction(target_smi: str, stereo: str, offload_mech: str):
         'final_pks_product': Chem.MolToSmiles(krs_result.pks_product),
         'mcs_similarity': mcs_score,
         'jaccard_i': compute_jaccard_sim(pp_result.unbound_mol, target_mol),
-        'jaccard_f': compute_jaccard_sim(krs_result.pks_product, target_mol)
+        'jaccard_f': compute_jaccard_sim(krs_result.pks_product, target_mol),
+        'retrotide_time': retrotide_time,
+        'krswaps_time': krswaps_time,
+        'total_time': alg_time
     }, problem_mods
 
 def output_results(results, job_name, output_path):
@@ -1497,7 +1509,10 @@ def output_results(results, job_name, output_path):
             'Final PKS Product': results['final_pks_product'],
             'MCS Similarity': results['mcs_similarity'],
             'Initial Jaccard Similarity': results['jaccard_i'],
-            'Final Jaccard Similarity': results['jaccard_f']
+            'Final Jaccard Similarity': results['jaccard_f'],
+            'RetroTide Initialization Runtime (s)': results['retrotide_time'],
+            'KR Swaps Runtime (s)': results['krswaps_time'],
+            'Total Runtime (s)': results['total_time']
         }, json_file, indent=2)
     with open(f'{output_path}/{job_name}_initial_stereo_correspondence.svg',
               'w', encoding='utf-8') as pre_img:

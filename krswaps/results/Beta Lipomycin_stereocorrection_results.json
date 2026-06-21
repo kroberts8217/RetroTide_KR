@@ -50,11 +50,14 @@
     [
       "M9",
       "AT Substrate: Malonyl-CoA",
-      "Reductive Loop: DH(E)-ER(L)-KR(B)"
+      "Reductive Loop: DH(E)-ER(D)-KR(B)"
     ]
   ],
   "Final PKS Product": "CC(/C=C/C=C/C=C/C=C/C=C(\\C)C(=O)CCCC(=O)O)=C\\[C@@H](C)[C@@H](O)C(C)C",
   "MCS Similarity": 0.8787878787878788,
-  "Initial Jaccard Similarity": 0.248046875,
-  "Final Jaccard Similarity": 0.38818359375
+  "Initial Jaccard Similarity": 0.2373046875,
+  "Final Jaccard Similarity": 0.3701171875,
+  "RetroTide Initialization Runtime (s)": 122.2943642779992,
+  "KR Swaps Runtime (s)": 0.1947891100007837,
+  "Total Runtime (s)": 122.48915338799998
 }

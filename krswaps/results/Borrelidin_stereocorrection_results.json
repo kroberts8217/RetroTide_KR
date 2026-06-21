@@ -50,6 +50,9 @@
   ],
   "Final PKS Product": "C/C1=C\\C=C\\C[C@@H]([C@@H]2CCC[C@H]2C(=O)O)OC(=O)C[C@H](O)[C@@H](C)C[C@@H](C)C[C@@H](C)C[C@H](C)[C@H]1O",
   "MCS Similarity": 0.9714285714285714,
-  "Initial Jaccard Similarity": 0.5283203125,
-  "Final Jaccard Similarity": 0.69189453125
+  "Initial Jaccard Similarity": 0.4765625,
+  "Final Jaccard Similarity": 0.66357421875,
+  "RetroTide Initialization Runtime (s)": 269.2406187710003,
+  "KR Swaps Runtime (s)": 2.3518176289999246,
+  "Total Runtime (s)": 271.5924364000002
 }

@@ -25,7 +25,7 @@
     [
       "M4",
       "AT Substrate: emal",
-      "Reductive Loop: KR(B2)"
+      "Reductive Loop: KR(B1)"
     ],
     [
       "M5",
@@ -40,11 +40,14 @@
     [
       "M7",
       "AT Substrate: Malonyl-CoA",
-      "Reductive Loop: DH(Z)-KR(A)"
+      "Reductive Loop: DH(E)-KR(B)"
     ]
   ],
-  "Final PKS Product": "CC[C@H]1C=CC(=O)O[C@H]1/C=C/[C@@H](CC)[C@H](O)C[C@@H](O)/C=C\\C=C/C1CCCCC1",
+  "Final PKS Product": "CC[C@H]1C=CC(=O)O[C@H]1/C=C/[C@H](CC)[C@H](O)C[C@@H](O)/C=C\\C=C/C1CCCCC1",
   "MCS Similarity": 0.8285714285714286,
-  "Initial Jaccard Similarity": 0.2705078125,
-  "Final Jaccard Similarity": 0.38525390625
+  "Initial Jaccard Similarity": 0.224609375,
+  "Final Jaccard Similarity": 0.3056640625,
+  "RetroTide Initialization Runtime (s)": 126.06703774999914,
+  "KR Swaps Runtime (s)": 0.587723807000657,
+  "Total Runtime (s)": 126.6547615569998
 }
