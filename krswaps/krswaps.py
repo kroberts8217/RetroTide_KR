@@ -937,7 +937,7 @@ def kr_type_logic(pks_features: dict, target_mod: int, alpha: bool, beta: bool) 
         print('    Case 1: Malonyl-CoA has no alpha substituent. Only beta is wrong -> swapping letter only')
     elif (substrate == 'Malonyl-CoA' and pks_features['ER Type'][target_mod] != 'None'):
         new_kr_type = 'B'
-    elif (substrate == 'Methylmalonyl-CoA' and pks_features['DH Type'][target_mod] != 'None'):
+    elif (substrate != 'Malonyl-CoA' and pks_features['DH Type'][target_mod] != 'None'):
         new_kr_type = 'B1'
     # Complex cases
     elif old_kr_type == 'None':
@@ -1125,8 +1125,12 @@ def er_swaps(pks_features: dict, mismatch_results: list) -> dict:
     Returns:
         pks_features (dict): The updated PKS design post ER domain swaps
     """
+    processed_modules = set()
     for result in mismatch_results:
-        identify_er_swap_case(pks_features, result)
+        target_mod = get_mod_number(result['module_i+1'])
+        if target_mod not in processed_modules:
+            identify_er_swap_case(pks_features, result)
+            processed_modules.add(target_mod)
     return pks_features
 
 def dh_swaps(pks_features: dict, mismatch_results: list) -> dict:
