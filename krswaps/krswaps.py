@@ -442,7 +442,7 @@ def find_target_lactone(mol: Chem.Mol, full_map_df: pd.DataFrame) -> tuple:
     target_lactone_atoms = set()
     lactone_atoms = get_lactone_atoms(mol)
     for atom in lactone_atoms:
-        target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == atom, 'Target Atom Idx']
+        target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == atom, 'Target Atom Idx'].iloc[0]
         target_lactone_atoms.add(int(target_idx))
     return tuple(target_lactone_atoms)
 
