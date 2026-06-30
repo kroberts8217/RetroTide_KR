@@ -1,0 +1,8 @@
+{
+  "Target Molecule": "CC([C@H](O)[C@@H](/C=C(/C=C/C=C/C=C/C=C/C(O)=C1C(N(C)[C@@H](CCC(O)=O)C/1=O)=O)C)C)C",
+  "PKS Product": "CC(C)[C@H](O)[C@H](C)C(=O)O",
+  "PKS Design": "[[\"AT{'substrate': 'isobut'}\", 'loading: True'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'A2'}\", 'loading: False']]",
+  "MCS Similarity": 0.22857142857142856,
+  "Jaccard Similarity": 0.0341796875,
+  "RetroTide Runtime (s)": 0.32533701899956213
+}

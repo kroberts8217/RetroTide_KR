@@ -1,0 +1,8 @@
+{
+  "Target Molecule": "C1C=CC(=O)O[C@H]1/C=C/C[C@@H](C[C@H](/C=C/C2=CC=CC=C2)O)O",
+  "PKS Product": "O=C([S])/C=C\\C=Cc1ccccc1",
+  "PKS Design": "[[\"AT{'substrate': 'cin'}\", 'loading: True'], [\"AT{'substrate': 'Malonyl-CoA'}\", \"KR{'type': 'A'}\", \"DH{'type': 'Z'}\", 'loading: False']]",
+  "MCS Similarity": 0.36,
+  "Jaccard Similarity": 0.056640625,
+  "RetroTide Runtime (s)": 0.04390158000023803
+}

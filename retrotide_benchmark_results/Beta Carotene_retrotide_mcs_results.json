@@ -1,0 +1,8 @@
+{
+  "Target Molecule": "CC1=C(C(CCC1)(C)C)/C=C/C(=C/C=C/C(=C/C=C/C=C(/C=C/C=C(/C=C/C2=C(CCCC2(C)C)C)\\C)\\C)/C)/C",
+  "PKS Product": "C[C@@H](CCCC1=CC[C@@H](O)[C@H](O)C1)C(=O)O",
+  "PKS Design": "[[\"AT{'substrate': 'DHCHene'}\", 'loading: True'], [\"AT{'substrate': 'Malonyl-CoA'}\", \"KR{'type': 'B'}\", \"DH{'type': 'E'}\", \"ER{'type': 'D'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'B1'}\", \"DH{'type': 'E'}\", \"ER{'type': 'L'}\", 'loading: False']]",
+  "MCS Similarity": 0.21739130434782608,
+  "Jaccard Similarity": 0.0244140625,
+  "RetroTide Runtime (s)": 9.901774497004226
+}
