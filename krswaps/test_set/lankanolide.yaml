@@ -1,0 +1,7 @@
+extender_codes: Methylmalonyl-CoA
+job_name: Lankanolide
+molecule: C[C@H]1C[C@]([C@@H]([C@H]([C@H]([C@H]([C@H](OC(=O)[C@@H]([C@H]([C@@H]([C@H]1O)C)O)C)[C@@H](C)[C@H](C)O)C)OC(=O)C)C)O)(C)O
+offload_mech: cyclization
+output_dir: ./krswaps/results
+starter_codes: 2metbut
+stereo: all
