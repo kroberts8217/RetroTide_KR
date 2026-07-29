@@ -1,8 +1,0 @@
-{
-  "Target Molecule": "CC[C@@H]1C[C@H]2[C@H](CCC2=O)C(=C1)C(=O)O",
-  "PKS Product": "CC[C@@H](/C=C/C(=O)O)CC1=CCCC1=O",
-  "PKS Design": "[[\"AT{'substrate': 'cyclopentene'}\", 'loading: True'], [\"AT{'substrate': 'emal'}\", \"KR{'type': 'B1'}\", \"DH{'type': 'E'}\", \"ER{'type': 'D'}\", 'loading: False'], [\"AT{'substrate': 'Malonyl-CoA'}\", \"KR{'type': 'B'}\", \"DH{'type': 'E'}\", 'loading: False']]",
-  "MCS Similarity": 1.0,
-  "Jaccard Similarity": 0.16357421875,
-  "RetroTide Runtime (s)": 6.270234983996488
-}

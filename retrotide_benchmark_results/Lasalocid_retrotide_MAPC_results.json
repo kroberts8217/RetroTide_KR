@@ -1,8 +1,0 @@
-{
-  "Target Molecule": "CC[C@H]([C@@H]1[C@H](C[C@@](O1)(CC)[C@H]2CC[C@@]([C@@H](O2)C)(CC)O)C)C(=O)[C@@H](C)[C@H]([C@H](C)CCC3=C(C(=C(C=C3)C)O)C(=O)O)O",
-  "PKS Product": "CC[C@@H](C(=O)[C@@H](C)[C@@H](C)O)[C@@H](O)[C@H](C)C(=O)[C@@H](C)C[C@@H](C)C(=O)[C@@H](C)[C@@H](O)[C@H](C)C[C@@H](C)C(=O)O",
-  "PKS Design": "[[\"AT{'substrate': 'Malonyl-CoA'}\", 'loading: True'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'B2'}\", 'loading: False'], [\"AT{'substrate': 'emal'}\", \"KR{'type': 'C2'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'B2'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'C1'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'B1'}\", \"DH{'type': 'E'}\", \"ER{'type': 'D'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'C1'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'B2'}\", 'loading: False'], [\"AT{'substrate': 'Methylmalonyl-CoA'}\", \"KR{'type': 'B1'}\", \"DH{'type': 'E'}\", \"ER{'type': 'D'}\", 'loading: False']]",
-  "MCS Similarity": 0.54,
-  "Jaccard Similarity": 0.08203125,
-  "RetroTide Runtime (s)": 2997.519310958989
-}
