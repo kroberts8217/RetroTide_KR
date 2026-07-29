@@ -130,7 +130,7 @@ def initial_pks(target_smi: str) -> tuple[list, Chem.Mol]:
     """
     designs = designPKS(Chem.MolFromSmiles(target_smi),
                         maxDesignsPerRound = 500,
-                        similarity = 'mcs_without_stereo')
+                        similarity = 'mcs_without_stereo') # can replace with any similarity metric supported by retrotide compareToTarget
     pks_design = designs[-1][0][0].modules
     mol = designs[-1][0][0].computeProduct(structureDB)
     return pks_design, mol
@@ -227,8 +227,16 @@ def te_offload(pks_product: Chem.Mol, mol: Chem.Mol, release_mechanism: str) -> 
                     unbound_mol = editable_product.GetMol()
                     Chem.SanitizeMol(unbound_mol)
                     return (unbound_mol,)
-            raise ValueError(f"No hydroxyl group found at the target distance {target_size}. Cannot cyclize")
-        raise ValueError("No valid lactone found in target molecule. Cannot cyclize.")
+            try:
+                raise ValueError(f"No hydroxyl group found at the target distance {target_size}. Cannot cyclize")
+            except ValueError as e:
+                print(f"Warning: {e}")
+            return (pks_product,)
+        try:
+            raise ValueError("No valid lactone found in target molecule. Cannot cyclize.")
+        except ValueError as e:
+            print(f"Warning: {e}")
+        return (pks_product,)
     if release_mechanism not in ['thiolysis', 'cyclization']:
         raise ValueError("Invalid release mechanism. Choose 'thiolysis' or 'cyclization'.")
 
@@ -426,7 +434,8 @@ def get_lactone_atoms(mol: Chem.Mol) -> tuple:
     """
     ester_matches = substructure_search(
         mol, '[C:1](=[O:2])[O:3][C:4]')
-    return lactone_size(mol, ester_matches)[1]
+    if ester_matches:
+        return lactone_size(mol, ester_matches)[1]
 
 def find_target_lactone(mol: Chem.Mol, full_map_df: pd.DataFrame) -> tuple:
     """
@@ -442,8 +451,17 @@ def find_target_lactone(mol: Chem.Mol, full_map_df: pd.DataFrame) -> tuple:
     target_lactone_atoms = set()
     lactone_atoms = get_lactone_atoms(mol)
     for atom in lactone_atoms:
-        target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == atom, 'Target Atom Idx'].iloc[0]
-        target_lactone_atoms.add(int(target_idx))
+        atom = mol.GetAtomWithIdx(atom)
+        try:
+            old_idx = int(atom.GetProp("old_mapno"))
+        except:
+            continue
+        try:
+            target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == old_idx, 'Target Atom Idx'].iloc[0]
+            target_lactone_atoms.add(int(target_idx))
+        except IndexError:
+            print(f"No target atom index found for atom {old_idx}")
+            continue
     return tuple(target_lactone_atoms)
 
 def force_target_lactone_alkene(mol: Chem.Mol, lactone_atoms: tuple) -> Chem.Mol:
@@ -489,16 +507,27 @@ def force_pks_lactone_alkene(mol: Chem.Mol, lactone_atoms: tuple, full_map_df: p
                 begin_idx = bond.GetBeginAtomIdx()
                 end_idx = bond.GetEndAtomIdx()
                 if begin_idx in lactone_atoms and end_idx in lactone_atoms:
-                    begin_module = get_mod_number(
-                        full_map_df.loc[full_map_df['Product Atom Idx'] == begin_idx, 'Module Idx'].values[0])
-                    end_module = get_mod_number(
-                        full_map_df.loc[full_map_df['Product Atom Idx'] == end_idx, 'Module Idx'].values[0])
-                    target_module = begin_module if begin_module > end_module else end_module
-                    dh_subtype = pks_features['DH Type'][target_module]
-                    if dh_subtype == 'Z':
-                        bond.SetStereo(Chem.BondStereo.STEREOZ)
-                    elif dh_subtype == 'E':
-                        bond.SetStereo(Chem.BondStereo.STEREOE)
+                    atom_begin = mol.GetAtomWithIdx(begin_idx)
+                    atom_end = mol.GetAtomWithIdx(end_idx)
+                    try:
+                        old_begin_idx = int(atom_begin.GetProp("old_mapno"))
+                        old_end_idx = int(atom_end.GetProp("old_mapno"))
+                    except:
+                        continue
+                    try:
+                        begin_module = get_mod_number(
+                            full_map_df.loc[full_map_df['Product Atom Idx'] == begin_idx, 'Module Idx'].values[0])
+                        end_module = get_mod_number(
+                            full_map_df.loc[full_map_df['Product Atom Idx'] == end_idx, 'Module Idx'].values[0])
+                        target_module = begin_module if begin_module > end_module else end_module
+                        dh_subtype = pks_features['DH Type'][target_module]
+                        if dh_subtype == 'Z':
+                            bond.SetStereo(Chem.BondStereo.STEREOZ)
+                        elif dh_subtype == 'E':
+                            bond.SetStereo(Chem.BondStereo.STEREOE)
+                    except IndexError:
+                        print(f"No target atom index found for atom {begin_idx} or {end_idx}")
+                        continue
     return mol
 
 # Assess stereochemistry correspondence functions
