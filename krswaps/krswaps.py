@@ -303,12 +303,43 @@ def extract_precursor_mol(mol: Chem.Mol, precursor_atoms: set) -> Chem.Mol:
         if (idx1 in precursor_atoms) != (idx2 in precursor_atoms):
             break_bonds.append((idx1, idx2))
     for idx1, idx2 in break_bonds:
+        bond = mol_copy.GetBondBetweenAtoms(idx1, idx2)
+        bond_type = bond.GetBondType()
         editable_target.RemoveBond(idx1, idx2)
+        if bond_type == Chem.rdchem.BondType.SINGLE:
+            if idx1 in precursor_atoms:
+                editable_target.AddBond(idx1, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+            else:
+                editable_target.AddBond(idx2, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+        elif bond_type == Chem.rdchem.BondType.DOUBLE:
+            if idx1 in precursor_atoms:
+                editable_target.AddBond(idx1, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+                editable_target.AddBond(idx1, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+            else:
+                editable_target.AddBond(idx2, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+                editable_target.AddBond(idx2, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+        elif bond_type == Chem.rdchem.BondType.TRIPLE:
+            if idx1 in precursor_atoms:
+                editable_target.AddBond(idx1, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+                editable_target.AddBond(idx1, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+                editable_target.AddBond(idx1, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+            else:
+                editable_target.AddBond(idx2, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+                editable_target.AddBond(idx2, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
+                editable_target.AddBond(idx2, editable_target.AddAtom(Chem.Atom('H')), Chem.rdchem.BondType.SINGLE)
     original_atoms = set(range(mol.GetNumAtoms()))
     remove_atoms = sorted(original_atoms - precursor_atoms, reverse=True)
     for atom_idx in remove_atoms:
         editable_target.RemoveAtom(atom_idx)
     precursor_mol = editable_target.GetMol()
+    for atom in precursor_mol.GetAtoms():
+        if atom.GetIsAromatic() and not atom.IsInRing():
+            atom.SetIsAromatic(False)
+    for bond in precursor_mol.GetBonds():
+        if bond.GetIsAromatic() and not bond.IsInRing():
+            bond.SetIsAromatic(False)
+    Chem.SanitizeMol(precursor_mol)
+    precursor_mol = Chem.RemoveHs(precursor_mol)
     return precursor_mol
 
 def get_pks_target(unbound_mol: Chem.Mol, mol: Chem.Mol) -> tuple[Chem.Mol, float]:
@@ -450,18 +481,16 @@ def find_target_lactone(mol: Chem.Mol, full_map_df: pd.DataFrame) -> tuple:
     """
     target_lactone_atoms = set()
     lactone_atoms = get_lactone_atoms(mol)
-    for atom in lactone_atoms:
-        atom = mol.GetAtomWithIdx(atom)
+    for atom_idx in lactone_atoms:
+        atom = mol.GetAtomWithIdx(atom_idx)
         try:
-            old_idx = int(atom.GetProp("old_mapno"))
-        except:
-            continue
-        try:
-            target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == old_idx, 'Target Atom Idx'].iloc[0]
+            target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == atom_idx, 'Target Atom Idx'].iloc[0]
             target_lactone_atoms.add(int(target_idx))
         except IndexError:
-            print(f"No target atom index found for atom {old_idx}")
-            continue
+            old_idx = int(atom.GetProp("old_mapno"))
+            target_idx = full_map_df.loc[full_map_df['Product Atom Idx'] == old_idx, 'Target Atom Idx'].iloc[0]
+            target_lactone_atoms.add(int(target_idx))
+            print(f"Warning: No target atom mapping found for PKS lactone atom {atom_idx}. Using old map number {old_idx} instead.")
     return tuple(target_lactone_atoms)
 
 def force_target_lactone_alkene(mol: Chem.Mol, lactone_atoms: tuple) -> Chem.Mol:
@@ -507,13 +536,6 @@ def force_pks_lactone_alkene(mol: Chem.Mol, lactone_atoms: tuple, full_map_df: p
                 begin_idx = bond.GetBeginAtomIdx()
                 end_idx = bond.GetEndAtomIdx()
                 if begin_idx in lactone_atoms and end_idx in lactone_atoms:
-                    atom_begin = mol.GetAtomWithIdx(begin_idx)
-                    atom_end = mol.GetAtomWithIdx(end_idx)
-                    try:
-                        old_begin_idx = int(atom_begin.GetProp("old_mapno"))
-                        old_end_idx = int(atom_end.GetProp("old_mapno"))
-                    except:
-                        continue
                     try:
                         begin_module = get_mod_number(
                             full_map_df.loc[full_map_df['Product Atom Idx'] == begin_idx, 'Module Idx'].values[0])
@@ -526,7 +548,7 @@ def force_pks_lactone_alkene(mol: Chem.Mol, lactone_atoms: tuple, full_map_df: p
                         elif dh_subtype == 'E':
                             bond.SetStereo(Chem.BondStereo.STEREOE)
                     except IndexError:
-                        print(f"No target atom index found for atom {begin_idx} or {end_idx}")
+                        print(f"Warning: No atom index found")
                         continue
     return mol
 
@@ -648,7 +670,7 @@ def preprocessing(pks_features: dict, unbound_mol: Chem.Mol, target_mol: Chem.Mo
     atom_mapped_df = atom_map(unbound_mol, target_mol)
     full_map_df = full_map(atom_mapped_df, module_mapped_df)
     lactone_atoms = get_lactone_atoms(unbound_mol)
-    if lactone_atoms:
+    if lactone_atoms and len(lactone_atoms) <= 6:
         target_lactone_atoms = find_target_lactone(unbound_mol, full_map_df)
         unbound_mol = force_pks_lactone_alkene(unbound_mol, lactone_atoms,
                                                full_map_df, pks_features)
@@ -656,8 +678,8 @@ def preprocessing(pks_features: dict, unbound_mol: Chem.Mol, target_mol: Chem.Mo
     else:
         Chem.AssignStereochemistry(unbound_mol, force=True, cleanIt=True)
         Chem.AssignStereochemistry(target_mol, force=True, cleanIt=True)
-    chiral_result = get_rs_stereo_correspondence(unbound_mol, target_mol, full_map_df)
     alkene_result = get_ez_stereo_correspondence(unbound_mol, target_mol, full_map_df)
+    chiral_result = get_rs_stereo_correspondence(unbound_mol, target_mol, full_map_df)
     return ProcessingResult(unbound_mol, target_mol, full_map_df, chiral_result, alkene_result)
 
 # Identify stereochemistry mismatch case functions
@@ -1437,7 +1459,7 @@ def visualize_stereo_correspondence(mol1: Chem.Mol, mol2: Chem.Mol, chiral_resul
     opts.drawMolsSameScale = True
     opts.padding = 0.1
 
-    img.DrawMolecules([mol1, mol2], legends=['PKS Product', 'Target'],
+    img.DrawMolecules([Chem.RemoveHs(mol1), Chem.RemoveHs(mol2)], legends=['PKS Product', 'Target'],
                       highlightAtoms=[all_1, all_2],
                       highlightAtomColors=[highlight_1, highlight_2],
                       highlightBonds=[bond_indices_1, bond_indices_2],
