@@ -993,7 +993,8 @@ def kr_type_logic(pks_features: dict, target_mod: int, alpha: bool, beta: bool) 
     # Complex cases
     # If reductive loop is none, the alpha-substituent is (S) due to implicit KS domain.
     # Use C1 (catalytically inactive) as a proxy for the correct (R) stereochemistry.
-    elif old_kr_type == 'None':
+    # Only relevant if the substrate has an alpha-substituent.
+    elif (old_kr_type == 'None' and substrate != 'Malonyl-CoA'):
         if target_mod != 0:
             new_kr_type = 'C1' # C1 and no KR domain provides same stereochemistry outcome
         else:
