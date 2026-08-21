@@ -9,7 +9,7 @@ width='1000px' height='400px' viewBox='0 0 1000 400'>
 <rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='1000.0' height='400.0' x='0.0' y='0.0'> </rect>
 <ellipse cx='419.6' cy='193.3' rx='9.1' ry='4.9' class='atom-1'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='398.3' cy='181.3' rx='9.4' ry='4.9' class='atom-2'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<ellipse cx='313.8' cy='182.4' rx='9.8' ry='5.0' class='atom-11'  style='fill:#FF0000;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<ellipse cx='313.8' cy='182.4' rx='9.8' ry='5.0' class='atom-11'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='271.5' cy='182.9' rx='10.3' ry='4.9' class='atom-16'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='250.5' cy='195.4' rx='10.3' ry='4.9' class='atom-19'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='229.2' cy='183.4' rx='9.8' ry='4.9' class='atom-21'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
@@ -36,7 +36,9 @@ width='1000px' height='400px' viewBox='0 0 1000 400'>
 <path class='bond-11 atom-9 atom-12' d='M 336.9,198.6 L 337.1,214.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <path class='bond-12 atom-13 atom-10' d='M 337.6,147.2 L 351.0,154.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <path class='bond-13 atom-11 atom-14' d='M 306.5,186.7 L 300.0,190.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-14 atom-11 atom-15' d='M 313.7,177.3 L 311.7,163.1 L 315.4,163.0 Z' style='fill:#000000;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path class='bond-14 atom-11 atom-15' d='M 314.3,173.8 L 313.0,173.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-14 atom-11 atom-15' d='M 314.8,170.2 L 312.4,170.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-14 atom-11 atom-15' d='M 315.4,166.7 L 311.7,166.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <path class='bond-15 atom-14 atom-16' d='M 285.2,190.6 L 279.1,187.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <path class='bond-16 atom-14 atom-17' d='M 293.3,203.5 L 292.4,203.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <path class='bond-16 atom-14 atom-17' d='M 293.8,207.0 L 292.0,207.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
@@ -2539,15 +2541,15 @@ Q 358.6 150.7, 358.9 150.7
 Q 306.0 189.8, 306.4 189.4
 Q 306.8 188.9, 307.6 188.9
 Q 308.3 188.9, 308.7 189.4
-L 308.3 189.7
+L 308.4 189.7
 Q 308.1 189.3, 307.6 189.3
-Q 307.0 189.3, 306.8 189.7
+Q 307.1 189.3, 306.8 189.7
 Q 306.5 190.0, 306.5 190.7
 Q 306.5 191.4, 306.8 191.7
-Q 307.1 192.1, 307.6 192.1
-Q 308.0 192.1, 308.4 191.9
+Q 307.1 192.1, 307.7 192.1
+Q 308.0 192.1, 308.5 191.9
 L 308.6 192.2
-Q 308.4 192.3, 308.1 192.4
+Q 308.4 192.3, 308.2 192.4
 Q 307.9 192.5, 307.6 192.5
 Q 306.8 192.5, 306.4 192.0
 Q 306.0 191.6, 306.0 190.7
@@ -2576,63 +2578,71 @@ L 312.1 192.4
 L 310.2 192.4
 L 310.2 192.0
 ' fill='#000000'/>
-<path class='note' d='M 312.6 192.0
+<path class='note' d='M 312.7 192.0
 L 313.4 192.0
 L 313.4 189.5
 L 312.6 189.7
-L 312.4 189.4
+L 312.5 189.4
 L 313.5 189.0
 L 313.9 189.0
 L 313.9 192.0
-L 314.5 192.0
-L 314.5 192.4
-L 312.6 192.4
-L 312.6 192.0
+L 314.6 192.0
+L 314.6 192.4
+L 312.7 192.4
+L 312.7 192.0
 ' fill='#000000'/>
 <path class='note' d='' fill='#000000'/>
 <path class='note' d='M 316.7 191.0
 Q 316.7 190.3, 316.9 189.8
 Q 317.1 189.2, 317.5 188.6
-L 317.7 188.7
+L 317.8 188.7
 Q 317.4 189.3, 317.3 189.8
 Q 317.1 190.4, 317.1 191.0
 Q 317.1 191.7, 317.3 192.2
-Q 317.4 192.7, 317.7 193.3
+Q 317.4 192.7, 317.8 193.3
 L 317.5 193.5
 Q 317.1 192.9, 316.9 192.3
 Q 316.7 191.7, 316.7 191.0
 ' fill='#000000'/>
-<path class='note' d='M 319.9 192.4
-L 319.0 191.0
-L 319.0 191.0
-L 318.5 191.0
-L 318.5 192.4
-L 318.0 192.4
-L 318.0 189.0
-L 319.0 189.0
-Q 319.6 189.0, 319.9 189.2
-Q 320.2 189.5, 320.2 190.0
-Q 320.2 190.4, 320.0 190.6
-Q 319.9 190.8, 319.5 190.9
-L 320.4 192.4
-L 319.9 192.4
-M 318.5 190.6
-L 319.0 190.6
-Q 319.4 190.6, 319.5 190.5
-Q 319.7 190.3, 319.7 190.0
-Q 319.7 189.7, 319.5 189.5
-Q 319.4 189.4, 319.0 189.4
-L 318.5 189.4
-L 318.5 190.6
+<path class='note' d='M 318.2 191.9
+Q 318.2 191.9, 318.4 192.0
+Q 318.5 192.0, 318.7 192.1
+Q 318.9 192.1, 319.1 192.1
+Q 319.4 192.1, 319.6 192.0
+Q 319.8 191.8, 319.8 191.5
+Q 319.8 191.3, 319.7 191.2
+Q 319.6 191.1, 319.4 191.0
+Q 319.3 191.0, 319.0 190.9
+Q 318.7 190.8, 318.5 190.7
+Q 318.4 190.6, 318.2 190.5
+Q 318.1 190.3, 318.1 190.0
+Q 318.1 189.5, 318.4 189.3
+Q 318.7 189.0, 319.3 189.0
+Q 319.7 189.0, 320.1 189.2
+L 320.0 189.6
+Q 319.6 189.4, 319.3 189.4
+Q 319.0 189.4, 318.8 189.5
+Q 318.6 189.7, 318.6 189.9
+Q 318.6 190.1, 318.7 190.2
+Q 318.8 190.3, 318.9 190.4
+Q 319.1 190.4, 319.3 190.5
+Q 319.6 190.6, 319.8 190.7
+Q 320.0 190.8, 320.1 191.0
+Q 320.2 191.2, 320.2 191.5
+Q 320.2 192.0, 319.9 192.3
+Q 319.6 192.5, 319.1 192.5
+Q 318.8 192.5, 318.5 192.5
+Q 318.3 192.4, 318.0 192.3
+L 318.2 191.9
 ' fill='#000000'/>
 <path class='note' d='M 321.7 191.0
 Q 321.7 191.7, 321.5 192.3
 Q 321.3 192.9, 320.9 193.5
-L 320.7 193.3
-Q 321.0 192.7, 321.1 192.2
+L 320.6 193.3
+Q 320.9 192.7, 321.1 192.2
 Q 321.3 191.7, 321.3 191.0
 Q 321.3 190.4, 321.1 189.8
-Q 321.0 189.3, 320.7 188.7
+Q 320.9 189.3, 320.6 188.7
 L 320.9 188.6
 Q 321.3 189.2, 321.5 189.8
 Q 321.7 190.3, 321.7 191.0
@@ -5722,7 +5732,7 @@ L 288.3 352.6
 <ellipse cx='822.2' cy='223.7' rx='4.9' ry='4.9' class='atom-6'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='836.6' cy='243.5' rx='4.9' ry='4.9' class='atom-8'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='744.9' cy='189.3' rx='4.9' ry='4.9' class='atom-13'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<ellipse cx='713.0' cy='166.1' rx='4.9' ry='4.9' class='atom-15'  style='fill:#FF0000;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<ellipse cx='713.0' cy='166.1' rx='4.9' ry='4.9' class='atom-15'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='676.3' cy='102.6' rx='4.9' ry='4.9' class='atom-21'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='664.1' cy='123.8' rx='4.9' ry='4.9' class='atom-24'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
 <ellipse cx='752.5' cy='166.1' rx='4.9' ry='4.9' class='atom-28'  style='fill:#00FFFF;fill-rule:evenodd;stroke:#00FFFF;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />

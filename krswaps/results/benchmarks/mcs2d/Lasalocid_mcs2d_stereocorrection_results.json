@@ -15,7 +15,7 @@
     [
       "M2",
       "AT Substrate: Methylmalonyl-CoA",
-      "Reductive Loop: DH(E)-ER(L)-KR(B1)"
+      "Reductive Loop: DH(E)-ER(D)-KR(B1)"
     ],
     [
       "M3",
@@ -25,7 +25,7 @@
     [
       "M4",
       "AT Substrate: Methylmalonyl-CoA",
-      "Reductive Loop: KR(C2)"
+      "Reductive Loop: KR(C1)"
     ],
     [
       "M5",
@@ -35,7 +35,7 @@
     [
       "M6",
       "AT Substrate: emal",
-      "Reductive Loop: KR(C2)"
+      "Reductive Loop: KR(C1)"
     ],
     [
       "M7",
@@ -48,11 +48,11 @@
       "Reductive Loop: DH(E)-ER(L)-KR(B)"
     ]
   ],
-  "Final PKS Product": "CC[C@@H](C[C@H](C)[C@@H](O)[C@H](CC)C(=O)[C@H](C)[C@H](O)[C@@H](CC)C(=O)[C@H](CC)[C@@H](O)[C@H](C)CCC(=O)O)[C@@H](C)O",
+  "Final PKS Product": "CC[C@@H](C[C@@H](C)[C@@H](O)[C@H](CC)C(=O)[C@@H](C)[C@H](O)[C@@H](CC)C(=O)[C@@H](CC)[C@@H](O)[C@H](C)CCC(=O)O)[C@@H](C)O",
   "MCS Similarity": 0.6458333333333334,
-  "Initial Jaccard Similarity": 0.0673828125,
-  "Final Jaccard Similarity": 0.0732421875,
-  "RetroTide Initialization Runtime (s)": 3219.990319798002,
-  "KR Swaps Runtime (s)": 0.4606482009985484,
-  "Total Runtime (s)": 3220.4509679990006
+  "Initial Jaccard Similarity": 0.06982421875,
+  "Final Jaccard Similarity": 0.0693359375,
+  "RetroTide Initialization Runtime (s)": 3646.712182359999,
+  "KR Swaps Runtime (s)": 0.41393285500089405,
+  "Total Runtime (s)": 3647.126115215
 }
