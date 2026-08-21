@@ -991,12 +991,19 @@ def kr_type_logic(pks_features: dict, target_mod: int, alpha: bool, beta: bool) 
     elif (substrate != 'Malonyl-CoA' and pks_features['DH Type'][target_mod] != 'None'):
         new_kr_type = 'B1'
     # Complex cases
+    # If reductive loop is none, the alpha-substituent is (S) due to implicit KS domain.
+    # Use C1 (catalytically inactive) as a proxy for the correct (R) stereochemistry.
     elif old_kr_type == 'None':
+        if target_mod != 0:
+            new_kr_type = 'C1' # C1 and no KR domain provides same stereochemistry outcome
+        else:
+            print('    Loading module has no reductive loop. Cannot add KR domain')
+    elif old_kr_type == 'C1':
         if alpha:
             new_kr_type = 'C2'
             print('    Case 5: Adding KR type C2 to perform epimerization of the alpha chiral center')
         else:
-            print('    No KR domain and not an alpha carbon mismatch -> cannot fix by KR swap')
+            print('    No hydroxyl group and not an alpha carbon mismatch -> cannot fix by KR swap')
     else:
         letter = old_kr_type[0]
         number = old_kr_type[1:] if len(old_kr_type) >= 2 else '1'
