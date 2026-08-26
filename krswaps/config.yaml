@@ -3,5 +3,5 @@ molecule: CC[C@@H]1[C@@H]([C@@H]([C@H](C(=O)[C@@H](C[C@@H]([C@@H]([C@H]([C@@H]([
 output_dir: ../krswaps/results
 starter_codes: prop
 extender_codes: Methylmalonyl-CoA
-stereo: R/S
+stereo: all
 offload_mech: cyclization
